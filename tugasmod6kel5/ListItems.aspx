@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"
+<%@ Page Language="C#" AutoEventWireup="true"
 CodeBehind="ListItems.aspx.cs"
 Inherits="tugasmod6kel5.ListItems" %>
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ Text="CLEAR" OnClick="btnClearLaptop_Click" />
             <asp:GridView ID="GridViewTipe" runat="server">
             </asp:GridView>
         </div>
-        <div style="float: left;">
+        <div style="clear: both;">
             <p>
                 View Laptoptipe SBD Mod 6 Kel 5
             </p>
