@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 using System.Data;
 using System.Web.UI;
@@ -111,10 +111,29 @@ namespace tugasmod6kel5
 
         protected void btnUpdateTipe_Click(object sender, EventArgs e)
         {
-            dt = new DataTable();
-            cmd.CommandText = "Update LAPTOP set NAMA_TIPE='" + txtNamaTipe.Text + "',  PROSESSOR = '" + txtNamaLaptop.Text + "',  ID_LAPTOP = '" + txtIdLaptop2.Text + "' WHERE ID_TIPE = '" + txtIdTipe.Text + "'";
-            cmd.Connection = con; cmd.ExecuteNonQuery(); DataShowTipe(); DataShowLaptoptipe();
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("UPDATE TIPE SET NAMA_TIPE = @NAMA_TIPE, PROSESSOR = @PROSESSOR, ID_LAPTOP = @ID_LAPTOP WHERE ID_TIPE = @ID_TIPE", con))
+                {
+                    cmd.Parameters.AddWithValue("@NAMA_TIPE", txtNamaTipe.Text);
+                    cmd.Parameters.AddWithValue("@PROSESSOR", txtProsessor.Text); 
+                    cmd.Parameters.AddWithValue("@ID_LAPTOP", txtIdLaptop2.Text);
+                    cmd.Parameters.AddWithValue("@ID_TIPE", txtIdTipe.Text);
+
+                    
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    DataShowTipe();
+                    DataShowLaptoptipe();
+                }
+            }
+            catch (SqlException ex)
+            {
+                Response.Write("Error: " + ex.Message);
+            }
         }
+
 
         protected void btnClearTipe_Click(object sender, EventArgs e)
         {
